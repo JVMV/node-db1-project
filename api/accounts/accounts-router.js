@@ -3,25 +3,27 @@ const Accounts = require('./accounts-model')
 
 const { checkAccountId, checkAccountNameUnique, checkAccountPayload } = require('./accounts-middleware')
 
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
   // DO YOUR MAGIC
   const reqAccount = await Accounts.getAll()
   res.status(200).json(reqAccount)
 })
 
-router.get('/:id', (req, res, next) => {
+router.get('/:id', checkAccountId, (req, res) => {
   // DO YOUR MAGIC
+  res.status(200).json(req.account)
 })
 
-router.post('/', (req, res, next) => {
+router.post('/', checkAccountPayload, checkAccountNameUnique, (req, res) => {
   // DO YOUR MAGIC
+
 })
 
-router.put('/:id', (req, res, next) => {
+router.put('/:id', (req, res) => {
   // DO YOUR MAGIC
 });
 
-router.delete('/:id', (req, res, next) => {
+router.delete('/:id', (req, res) => {
   // DO YOUR MAGIC
 })
 
