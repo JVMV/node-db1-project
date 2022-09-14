@@ -10,8 +10,8 @@ const getById = async id => {
   return reqAccount
 }
 
-const create = async account => {
-  const createdAccount = await db('accounts').insert(account)
+const create = async ({ name, budget }) => {
+  const createdAccount = await db('accounts').insert({ name: name, budget: budget })
   return createdAccount
 }
 
@@ -25,10 +25,10 @@ const deleteById = id => {
   return deletedAccount
 }
 
-const checkName = name => {
-  const nameChecked = db('accounts').where('name', name)
-  const decision = nameChecked ? true : false
-  return decision
+const checkName = async name => {
+  const nameChecked = await db('accounts').where('name', name)
+  const [checked] = nameChecked
+  return checked
 }
 
 const checkId = async id => {
